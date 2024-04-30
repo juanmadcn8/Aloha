@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Service {
+public class ServiceModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
