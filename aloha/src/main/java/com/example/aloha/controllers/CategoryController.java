@@ -13,39 +13,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.aloha.models.Lessor;
-import com.example.aloha.services.LessorService;
+import com.example.aloha.models.Category;
+import com.example.aloha.services.CategoryService;
 
 @RestController
-@RequestMapping("/api/lessor")
-public class LessorController {
+@RequestMapping("/api/category")
+public class CategoryController {
 
     @Autowired
-    private LessorService lessorService;
+    private CategoryService categoryService;
 
     @GetMapping()
-    public List<Lessor> getLessors() {
-        return lessorService.getLessors();
+    public List<Category> getCategories() {
+        return categoryService.getCategories();
     }
 
     @GetMapping("/{id}")
-    public Optional<Lessor> getLessorById(@PathVariable Long id) {
-        return lessorService.getLessorById(id);
+    public Optional<Category> getCategoryById(@PathVariable Long id) {
+        return categoryService.getCategoryById(id);
     }
 
     @PostMapping("/create")
-    public void createLessor(@RequestBody Lessor lessor) {
-        lessorService.createLessor(lessor);
+    public void createCategory(@RequestBody Category category) {
+        categoryService.createCategory(category);
     }
 
     @PutMapping("/update")
-    public void updateLessor(@RequestBody Lessor lessor) {
-        lessorService.updateLessor(lessor);
+    public void updateCategory(@RequestBody Category category) {
+        categoryService.updateCategory(category);
     }
 
     @DeleteMapping("/delete")
-    public void deleteLessor(@RequestBody Lessor lessor) {
-        lessorService.deleteLessorById(lessor.getId());
+    public void deleteCategoryById(@RequestBody Category category) {
+        categoryService.deleteCategoryById(category.getId());
     }
 
 }
