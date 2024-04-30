@@ -1,6 +1,7 @@
 package com.example.aloha.servicesimpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,19 +22,23 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public Optional<Admin> getAdminById(Long id) {
+        return adminRepository.findById(id);
+    }
+
+    @Override
     public void createAdmin(Admin admin) {
         adminRepository.save(admin);
     }
 
     @Override
-    public void deleteAdmin() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteAdmin'");
+    public void deleteAdminById(Long id) {
+        adminRepository.deleteById(id);
     }
 
     @Override
-    public void updateAdmin() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateAdmin'");
+    public void updateAdmin(Admin admin) {
+        adminRepository.save(admin);
     }
+
 }
