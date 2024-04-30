@@ -6,39 +6,39 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.aloha.models.AccommodationUnit;
-import com.example.aloha.repositories.AccommodationUnitRepository;
-import com.example.aloha.services.AccommodationUnitService;
+import com.example.aloha.models.Accommodation;
+import com.example.aloha.repositories.AccommodationRepository;
+import com.example.aloha.services.AccommodationService;
 
 @Service
-public class AccommodationServiceImpl implements AccommodationUnitService {
+public class AccommodationServiceImpl implements AccommodationService {
 
     @Autowired
-    private AccommodationUnitRepository accommodationUnitRepository;
+    private AccommodationRepository accommodationRepository;
 
     @Override
-    public List<AccommodationUnit> getAccommodationUnits() {
-        return accommodationUnitRepository.findAll();
+    public List<Accommodation> getAllAccommodations() {
+        return accommodationRepository.findAll();
     }
 
     @Override
-    public Optional<AccommodationUnit> getAccommodationUnitById(Long id) {
-        return accommodationUnitRepository.findById(id);
+    public Optional<Accommodation> getAccommodationById(Long id) {
+        return accommodationRepository.findById(id);
     }
 
     @Override
-    public void createAccommodationUnit(AccommodationUnit accommodationUnit) {
-        accommodationUnitRepository.save(accommodationUnit);
+    public void createAccommodation(Accommodation accommodation) {
+        accommodationRepository.save(accommodation);
     }
 
     @Override
-    public void deleteAccommodationUnitById(Long id) {
-        accommodationUnitRepository.deleteById(id);
+    public void updateAccommodation(Accommodation accommodation) {
+        accommodationRepository.save(accommodation);
     }
 
     @Override
-    public void updateAccommodationUnit(AccommodationUnit accommodationUnit) {
-        accommodationUnitRepository.save(accommodationUnit);
+    public void deleteAccommodation(Long id) {
+        accommodationRepository.deleteById(id);
     }
 
 }
