@@ -2,7 +2,6 @@ package com.example.aloha.config;
 
 import java.io.IOException;
 
-import org.springframework.boot.actuate.endpoint.SecurityContext;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
