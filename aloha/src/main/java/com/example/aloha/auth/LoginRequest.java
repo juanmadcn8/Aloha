@@ -1,4 +1,4 @@
-package com.example.aloha.models;
+package com.example.aloha.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,8 +7,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class AuthResponse {
-    private String token;
+@NoArgsConstructor
+public class LoginRequest {
+    String username;
+    String password;
 }

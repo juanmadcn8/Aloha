@@ -1,4 +1,4 @@
-package com.example.aloha.models;
+package com.example.aloha.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,10 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterRequest {
-
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-
+    String username;
+    String password;
+    String firstname;
+    String lastname;
+    String country;
 }
