@@ -10,7 +10,8 @@ import com.example.aloha.auth.AuthResponse;
 import com.example.aloha.auth.LoginRequest;
 import com.example.aloha.auth.RegisterRequest;
 import com.example.aloha.enums.Role;
-import com.example.aloha.models.User;
+import com.example.aloha.models.Client;
+import com.example.aloha.repositories.ClientRepository;
 import com.example.aloha.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -19,36 +20,34 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthService {
 
-        private final UserRepository userRepository;
+        private final ClientRepository clientRepository;
         private final JwtService jwtService;
         private final PasswordEncoder passwordEncoder;
         private final AuthenticationManager authenticationManager;
 
         public AuthResponse login(LoginRequest request) {
                 authenticationManager.authenticate(
-                                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-                UserDetails user = userRepository.findByUsername(request.getUsername()).orElseThrow();
-                String token = jwtService.getToken(user);
+                                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+                UserDetails client = clientRepository.findByEmail(request.getEmail()).orElseThrow();
+                String token = jwtService.getToken(client);
                 return AuthResponse.builder()
                                 .token(token)
                                 .build();
 
         }
 
-        public AuthResponse register(RegisterRequest request) {
-                User user = User.builder()
-                                .username(request.getUsername())
+        public AuthResponse registerClient(RegisterRequest request) {
+                Client client = Client.builder()
+                                .name(request.getName())
                                 .password(passwordEncoder.encode(request.getPassword()))
-                                .firstname(request.getFirstname())
-                                .lastname(request.getLastname())
-                                .country(request.getCountry())
-                                .role(Role.USER)
+                                .surname(request.getSurname())
+                                .email(request.getEmail())
+                                .role(Role.CLIENT)
                                 .build();
 
-                userRepository.save(user);
-
+                clientRepository.save(client);
                 return AuthResponse.builder()
-                                .token(jwtService.getToken(user))
+                                .token(jwtService.getToken(client))
                                 .build();
 
         }
