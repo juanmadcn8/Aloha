@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.example.aloha.jwt.JwtAuthenticationFilter;
 
@@ -28,7 +29,11 @@ public class SecurityConfig {
                                 .csrf(csrf -> csrf
                                                 .disable())
                                 .authorizeHttpRequests(authRequest -> authRequest
-                                                .requestMatchers("/auth/**", "/api-docs/**", "/swagger-ui/**")
+                                                .requestMatchers(
+                                                                new AntPathRequestMatcher("/h2-console/**"),
+                                                                new AntPathRequestMatcher("/auth/**"),
+                                                                new AntPathRequestMatcher("/swagger-ui/**"),
+                                                                new AntPathRequestMatcher("/api-docs/**"))
                                                 .permitAll()
                                                 .anyRequest().authenticated())
                                 .sessionManagement(sessionManager -> sessionManager

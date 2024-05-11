@@ -3,6 +3,7 @@ package com.example.aloha.servicesimpl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.aloha.models.Client;
@@ -12,6 +13,7 @@ import com.example.aloha.services.ClientService;
 @Service
 public class ClientServiceImpl implements ClientService {
 
+    @Autowired
     private ClientRepository clientRepository;
 
     @Override
