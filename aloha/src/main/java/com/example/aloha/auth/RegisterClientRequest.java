@@ -1,5 +1,7 @@
 package com.example.aloha.auth;
 
+import com.example.aloha.enums.Role;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +17,5 @@ public class RegisterClientRequest {
     String email;
     String password;
     String phone;
+    Role role;
 }

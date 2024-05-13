@@ -72,7 +72,7 @@ public class AuthService {
                                 .password(passwordEncoder.encode(request.getPassword()))
                                 .surname(request.getSurname())
                                 .email(request.getEmail())
-                                .role(Role.CLIENT)
+                                .role(request.getRole())
                                 .build();
 
                 clientRepository.save(client);
