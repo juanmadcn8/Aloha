@@ -7,6 +7,8 @@ import com.example.aloha.models.CategoryAccommodationUnit;
 
 public interface CategoryAccommodationUnitService {
 
+    public List<CategoryAccommodationUnit> getCategoryAccommodationUnitsByCategory(String category);
+
     public void createCategoryAccommodationUnit(CategoryAccommodationUnit categoryAccommodationUnit);
 
     public void updateCategoryAccommodationUnit(CategoryAccommodationUnit categoryAccommodationUnit);

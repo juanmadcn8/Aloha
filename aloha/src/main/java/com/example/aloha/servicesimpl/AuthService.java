@@ -14,8 +14,10 @@ import com.example.aloha.auth.RegisterClientRequest;
 import com.example.aloha.enums.Role;
 import com.example.aloha.models.Admin;
 import com.example.aloha.models.Client;
+import com.example.aloha.models.Lessor;
 import com.example.aloha.repositories.AdminRepository;
 import com.example.aloha.repositories.ClientRepository;
+import com.example.aloha.repositories.LessorRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +27,7 @@ public class AuthService {
 
         private final ClientRepository clientRepository;
         private final AdminRepository adminRepository;
+        private final LessorRepository lessorRepository;
         private final JwtService jwtService;
         private final PasswordEncoder passwordEncoder;
         private final AuthenticationManager authenticationManager;
@@ -67,19 +70,50 @@ public class AuthService {
         }
 
         public AuthResponse registerClient(RegisterClientRequest request) {
-                Client client = Client.builder()
-                                .name(request.getName())
-                                .password(passwordEncoder.encode(request.getPassword()))
-                                .surname(request.getSurname())
-                                .email(request.getEmail())
-                                .role(request.getRole())
-                                .build();
 
-                clientRepository.save(client);
-                return AuthResponse.builder()
-                                .token(jwtService.getToken(client))
-                                .build();
+                if (request.getRole() == Role.ADMIN) {
+                        Admin admin = Admin.builder()
+                                        .name(request.getName())
+                                        .password(passwordEncoder.encode(request.getPassword()))
+                                        .email(request.getEmail())
+                                        .role(Role.ADMIN)
+                                        .build();
 
+                        adminRepository.save(admin);
+
+                        return AuthResponse.builder()
+                                        .token(jwtService.getToken(admin))
+                                        .build();
+
+                } else if (request.getRole() == Role.CLIENT) {
+                        Client client = Client.builder()
+                                        .name(request.getName())
+                                        .password(passwordEncoder.encode(request.getPassword()))
+                                        .surname(request.getSurname())
+                                        .email(request.getEmail())
+                                        .role(request.getRole())
+                                        .build();
+
+                        clientRepository.save(client);
+
+                        return AuthResponse.builder()
+                                        .token(jwtService.getToken(client))
+                                        .build();
+                } else {
+                        Lessor lessor = Lessor.builder()
+                                        .name(request.getName())
+                                        .password(passwordEncoder.encode(request.getPassword()))
+                                        .email(request.getEmail())
+                                        .role(Role.LESSOR)
+                                        .phone(request.getPhone())
+                                        .build();
+
+                        lessorRepository.save(lessor);
+
+                        return AuthResponse.builder()
+                                        .token(jwtService.getToken(lessor))
+                                        .build();
+                }
         }
 
 }

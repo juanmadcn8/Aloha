@@ -41,4 +41,9 @@ public class CategoryAccommodationUnitServiceImpl implements CategoryAccommodati
         return categoryAccommodationUnitRepository.findById(id);
     }
 
+    @Override
+    public List<CategoryAccommodationUnit> getCategoryAccommodationUnitsByCategory(String category) {
+        return categoryAccommodationUnitRepository.findByCategoryName(category);
+    }
+
 }
