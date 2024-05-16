@@ -11,6 +11,8 @@ public interface AccommodationService {
 
     public Optional<Accommodation> getAccommodationById(Long id);
 
+    public List<Accommodation> getAccommodationsByLocation(String location);
+
     public void createAccommodation(Accommodation accommodation);
 
     public void updateAccommodation(Accommodation accommodation);

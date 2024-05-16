@@ -28,6 +28,11 @@ public class AccommodationUnitController {
         return accommodationUnitService.getAccommodationUnits();
     }
 
+    @GetMapping("/location/{location}")
+    public List<AccommodationUnit> getAccommodationUnitsByAccommodationLocation(@PathVariable String location) {
+        return accommodationUnitService.getAccommodationUnitsByAccommodationLocation(location);
+    }
+
     @GetMapping("/{id}")
     public Optional<AccommodationUnit> getAccommodationUnitById(@PathVariable Long id) {
         return accommodationUnitService.getAccommodationUnitById(id);

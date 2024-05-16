@@ -18,4 +18,6 @@ public class Accommodation {
     private String description;
 
     private String address;
+
+    private String location;
 }

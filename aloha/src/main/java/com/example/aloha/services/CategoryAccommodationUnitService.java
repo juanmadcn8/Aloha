@@ -3,6 +3,8 @@ package com.example.aloha.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Query;
+
 import com.example.aloha.models.CategoryAccommodationUnit;
 
 public interface CategoryAccommodationUnitService {
@@ -16,4 +18,6 @@ public interface CategoryAccommodationUnitService {
     public List<CategoryAccommodationUnit> getCategoryAccommodationUnits();
 
     public Optional<CategoryAccommodationUnit> getCategoryAccommodationUnitById(Long id);
+
+    public List<CategoryAccommodationUnit> getCategoryAccommodationUnitsByCategory(String category);
 }

@@ -41,4 +41,11 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
         accommodationUnitRepository.save(accommodationUnit);
     }
 
+    @Override
+    public List<AccommodationUnit> getAccommodationUnitsByAccommodationLocation(String location) {
+        return accommodationUnitRepository.findAll().stream()
+                .filter(accommodationUnit -> accommodationUnit.getAccommodation().getLocation().equals(location))
+                .toList();
+    }
+
 }

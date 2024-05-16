@@ -10,6 +10,8 @@ public interface AccommodationUnitService {
 
     public Optional<AccommodationUnit> getAccommodationUnitById(Long id);
 
+    public List<AccommodationUnit> getAccommodationUnitsByAccommodationLocation(String location);
+
     public void createAccommodationUnit(AccommodationUnit accommodationUnit);
 
     public void deleteAccommodationUnitById(Long id);

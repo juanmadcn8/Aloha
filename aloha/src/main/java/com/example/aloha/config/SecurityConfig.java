@@ -34,7 +34,7 @@ public class SecurityConfig {
                                                                 new AntPathRequestMatcher("/auth/**"),
                                                                 new AntPathRequestMatcher("/swagger-ui/**"),
                                                                 new AntPathRequestMatcher("/api-docs/**"),
-                                                                new AntPathRequestMatcher("/**")) // API ABIERTA
+                                                                new AntPathRequestMatcher("/**"))
                                                 .permitAll()
                                                 .anyRequest().authenticated())
                                 .sessionManagement(sessionManager -> sessionManager
