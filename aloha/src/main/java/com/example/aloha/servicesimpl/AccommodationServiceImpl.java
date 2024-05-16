@@ -41,4 +41,9 @@ public class AccommodationServiceImpl implements AccommodationService {
         accommodationRepository.deleteById(id);
     }
 
+    @Override
+    public List<Accommodation> getAccommodationsByLocation(String location) {
+        return accommodationRepository.findByLocation(location);
+    }
+
 }

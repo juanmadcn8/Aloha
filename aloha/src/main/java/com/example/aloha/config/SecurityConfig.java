@@ -33,7 +33,8 @@ public class SecurityConfig {
                                                                 new AntPathRequestMatcher("/h2-console/**"),
                                                                 new AntPathRequestMatcher("/auth/**"),
                                                                 new AntPathRequestMatcher("/swagger-ui/**"),
-                                                                new AntPathRequestMatcher("/api-docs/**"))
+                                                                new AntPathRequestMatcher("/api-docs/**"),
+                                                                new AntPathRequestMatcher("/**"))
                                                 .permitAll()
                                                 .anyRequest().authenticated())
                                 .sessionManagement(sessionManager -> sessionManager

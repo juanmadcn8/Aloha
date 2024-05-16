@@ -17,7 +17,7 @@ import com.example.aloha.models.CategoryAccommodationUnit;
 import com.example.aloha.services.CategoryAccommodationUnitService;
 
 @RestController
-@RequestMapping("/category-accommodation-unit")
+@RequestMapping("/api/category-accommodation-unit")
 public class CategoryAccommodationUnitController {
 
     @Autowired
