@@ -10,8 +10,8 @@ import com.example.aloha.models.CategoryAccommodationUnit;
 
 @Repository
 public interface CategoryAccommodationUnitRepository extends JpaRepository<CategoryAccommodationUnit, Long> {
-    // @Query(value = "SELECT Accommodation_Unit.name, Accommodation_Unit.address,
-    // Accommodation_Unit.Price_per_night FROM Accommodation_Unit INNER JOIN
-    // Category ON ", nativeQuery = true)
-    public List<CategoryAccommodationUnit> findByCategoryName(String categoryName);
+
+    @Query(value = "SELECT accommodation_unit.name FROM category_accommodation_unit as cau INNER JOIN accommodation_unit as au ON au.id = cau.id_accommodation_unit INNER JOIN category as c ON c.id = cau.id_category", nativeQuery = true)
+    List<CategoryAccommodationUnit> findByCategory(String category);
+
 }
