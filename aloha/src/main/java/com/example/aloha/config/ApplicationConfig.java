@@ -54,12 +54,14 @@ public class ApplicationConfig {
     }
 
     @Bean
+    // @Qualifier("client")
     public UserDetailsService clientDetailService() {
         return email -> clientRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Client not found"));
     }
 
     // @Bean
+    // @Qualifier("admin")
     // public UserDetailsService adminDetailService() {
     // return email -> adminRepository.findByEmail(email)
     // .orElseThrow(() -> new UsernameNotFoundException("Admin not found"));
