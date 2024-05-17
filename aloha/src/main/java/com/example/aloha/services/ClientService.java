@@ -10,6 +10,8 @@ public interface ClientService {
 
     public Optional<Client> getClientById(Long id);
 
+    public Optional<Client> getClientByEmail(String email);
+
     public void createClient(Client client);
 
     public void updateClient(Client client);

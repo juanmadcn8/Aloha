@@ -23,7 +23,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping(value = "loginClient")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginClientRequest request) {
+    public ResponseEntity<AuthResponse> loginC(@RequestBody LoginClientRequest request) {
         return ResponseEntity.ok(authService.loginClient(request));
     }
 
@@ -40,6 +40,11 @@ public class AuthController {
     @PostMapping(value = "registerAdmin")
     public ResponseEntity<AuthResponse> registerAdmin(@RequestBody RegisterAdminRequest request) {
         return ResponseEntity.ok(authService.registerAdmin(request));
+    }
+
+    @PostMapping(value = "login")
+    public ResponseEntity<AuthResponse> login(@RequestBody LoginClientRequest request) {
+        return ResponseEntity.ok(authService.loginClient(request));
     }
 
 }

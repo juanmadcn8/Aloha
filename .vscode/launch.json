@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-AlohaApplication<aloha>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.aloha.AlohaApplication",
+            "projectName": "aloha",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

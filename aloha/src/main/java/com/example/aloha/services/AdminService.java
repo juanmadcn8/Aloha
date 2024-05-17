@@ -11,6 +11,8 @@ public interface AdminService {
 
     public Optional<Admin> getAdminById(Long id);
 
+    public Optional<Admin> getAdminByEmail(String email);
+
     public void createAdmin(Admin admin);
 
     public void deleteAdminById(Long id);
