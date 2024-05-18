@@ -7,6 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class ClientDTO {
     private String email;
+    private String password;
     private String name;
     private String surname;
     private String phone;
