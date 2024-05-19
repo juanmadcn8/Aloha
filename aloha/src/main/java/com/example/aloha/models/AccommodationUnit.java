@@ -24,4 +24,8 @@ public class AccommodationUnit {
     @ManyToOne
     @JoinColumn(name = "accommodation_id")
     private Accommodation accommodation;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 }

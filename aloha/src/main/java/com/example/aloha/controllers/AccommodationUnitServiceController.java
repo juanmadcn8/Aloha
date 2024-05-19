@@ -33,6 +33,11 @@ public class AccommodationUnitServiceController {
         return accommodationUnitServiceService.getAccommodationUnitServiceById(id);
     }
 
+    @GetMapping("/accommodation-unit/{id}")
+    public List<AccommodationUnitService> getAccommodationUnitServicesByAccommodationUnitId(@PathVariable Long id) {
+        return accommodationUnitServiceService.getAccommodationUnitServicesByAccommodationUnitId(id);
+    }
+
     @PostMapping("/create")
     public void createAccommodationUnitService(@RequestBody AccommodationUnitService accommodationUnitService) {
         accommodationUnitServiceService.createAccommodationUnitService(accommodationUnitService);

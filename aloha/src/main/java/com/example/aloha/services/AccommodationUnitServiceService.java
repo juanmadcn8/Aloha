@@ -16,4 +16,6 @@ public interface AccommodationUnitServiceService {
     public void deleteAccommodationUnitServiceById(Long id);
 
     public void updateAccommodationUnitService(AccommodationUnitService accommodationUnitService);
+
+    public List<AccommodationUnitService> getAccommodationUnitServicesByAccommodationUnitId(Long id);
 }

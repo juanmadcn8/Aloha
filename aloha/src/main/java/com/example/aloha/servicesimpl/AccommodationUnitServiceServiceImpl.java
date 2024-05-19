@@ -41,4 +41,9 @@ public class AccommodationUnitServiceServiceImpl implements AccommodationUnitSer
         accommodationUnitServiceRepository.save(accommodationUnitService);
     }
 
+    @Override
+    public List<AccommodationUnitService> getAccommodationUnitServicesByAccommodationUnitId(Long id) {
+        return accommodationUnitServiceRepository.findByAccommodationUnitId(id);
+    }
+
 }
