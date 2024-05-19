@@ -15,17 +15,11 @@ public class AccommodationUnit {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String address;
-
     private Double price;
-
-    private String description;
 
     private Integer number;
 
     private Integer capacity;
-
-    private String name;
 
     @ManyToOne
     @JoinColumn(name = "lessor_id")
