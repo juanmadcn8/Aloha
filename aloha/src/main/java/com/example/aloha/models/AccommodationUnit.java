@@ -22,10 +22,6 @@ public class AccommodationUnit {
     private Integer capacity;
 
     @ManyToOne
-    @JoinColumn(name = "lessor_id")
-    private Lessor lessor;
-
-    @ManyToOne
     @JoinColumn(name = "accommodation_id")
     private Accommodation accommodation;
 }

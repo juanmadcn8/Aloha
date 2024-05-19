@@ -18,7 +18,7 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
 
     @Override
     public List<AccommodationUnit> getAccommodationUnits() {
-        return accommodationUnitRepository.findAll();
+        return accommodationUnitRepository.getAll();
     }
 
     @Override
