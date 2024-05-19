@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,18 +33,24 @@ public class BookingController {
         return bookingService.getBookingById(id);
     }
 
+    @GetMapping("/client/{id}")
+    public List<Booking> getBookingsByClientId(@PathVariable Long id) {
+        return bookingService.getBookingsByClientId(id);
+    }
+
     @PostMapping("/create")
-    public void createBooking(Booking booking) {
+    public void createBooking(@RequestBody Booking booking) {
+        System.out.println(booking);
         bookingService.createBooking(booking);
     }
 
     @PutMapping("/update")
-    public void updateBooking(Booking booking) {
+    public void updateBooking(@RequestBody Booking booking) {
         bookingService.updateBooking(booking);
     }
 
     @DeleteMapping("/delete")
-    public void deleteBooking(Booking booking) {
+    public void deleteBooking(@RequestBody Booking booking) {
         bookingService.deleteBooking(booking.getId());
     }
 

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.aloha.models.Card;
 import com.example.aloha.services.CardService;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 @RestController
 @RequestMapping("/api/card")
 public class CardController {
@@ -33,17 +35,17 @@ public class CardController {
     }
 
     @PostMapping("/create")
-    public void createCard(Card card) {
+    public void createCard(@RequestBody Card card) {
         cardService.createCard(card);
     }
 
     @PutMapping("/update")
-    public void updateCard(Card card) {
+    public void updateCard(@RequestBody Card card) {
         cardService.updateCard(card);
     }
 
     @DeleteMapping("/delete")
-    public void deleteCard(Card card) {
+    public void deleteCard(@RequestBody Card card) {
         cardService.deleteCard(card.getId());
     }
 
