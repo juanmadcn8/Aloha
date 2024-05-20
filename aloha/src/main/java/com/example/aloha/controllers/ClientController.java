@@ -18,7 +18,6 @@ import com.example.aloha.auth.AuthResponse;
 import com.example.aloha.auth.LoginClientRequest;
 import com.example.aloha.dtos.ClientDTO;
 import com.example.aloha.models.Client;
-import com.example.aloha.models.User;
 import com.example.aloha.services.ClientService;
 import com.example.aloha.servicesimpl.AuthService;
 
