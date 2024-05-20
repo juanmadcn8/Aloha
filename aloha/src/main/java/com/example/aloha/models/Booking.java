@@ -2,7 +2,6 @@ package com.example.aloha.models;
 
 import java.sql.Date;
 
-import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,7 +24,7 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String checkIn;
+    private Date checkIn;
 
     private Date checkOut;
 
