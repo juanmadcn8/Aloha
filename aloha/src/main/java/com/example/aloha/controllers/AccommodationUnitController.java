@@ -43,6 +43,11 @@ public class AccommodationUnitController {
         return accommodationUnitService.getAccommodationUnitsByCategoryHotel();
     }
 
+    @GetMapping("/category/{categories}")
+    public List<AccommodationUnit> getAccommodationUnitsByCategory(@PathVariable Boolean[] categories) {
+        return accommodationUnitService.getAccommodationUnitsByCategories(categories);
+    }
+
     @GetMapping("/category/bungalows")
     public List<AccommodationUnit> getAccommodationUnitsByCategoryBungalow() {
         return accommodationUnitService.getAccommodationUnitsByCategoryBungalow();

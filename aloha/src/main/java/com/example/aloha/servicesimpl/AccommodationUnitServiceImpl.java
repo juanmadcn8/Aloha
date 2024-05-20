@@ -1,5 +1,6 @@
 package com.example.aloha.servicesimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,6 +75,50 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
         return accommodationUnitRepository.findAll().stream()
                 .filter(accommodationUnit -> accommodationUnit.getCategory().getName().equals("house"))
                 .toList();
+    }
+
+    @Override
+    public List<AccommodationUnit> getAccommodationUnitsByCategories(Boolean[] categories) {
+        List<List<AccommodationUnit>> listaPrincipal = new ArrayList<>();
+        List<AccommodationUnit> accommodationUnits = accommodationUnitRepository.findAll();
+        List<AccommodationUnit> lista = new ArrayList<>();
+
+        for (int i = 0; i < categories.length; i++) {
+            if (categories[i]) {
+                switch (i) {
+                    case 0:
+                        lista = accommodationUnits.stream()
+                                .filter(accommodationUnit -> accommodationUnit.getCategory().getName().equals("house"))
+                                .toList();
+                        break;
+                    case 1:
+                        lista = accommodationUnits.stream()
+                                .filter(accommodationUnit -> accommodationUnit.getCategory().getName()
+                                        .equals("hotel"))
+                                .toList();
+                        break;
+                    case 2:
+                        accommodationUnits = accommodationUnits.stream()
+                                .filter(accommodationUnit -> accommodationUnit.getCategory().getName().equals("hostel"))
+                                .toList();
+                        listaPrincipal.add(accommodationUnits);
+                        break;
+
+                    case 3:
+                        accommodationUnits = accommodationUnits.stream()
+                                .filter(accommodationUnit -> accommodationUnit.getCategory().getName()
+                                        .equals("bungalow"))
+                                .toList();
+
+                        break;
+                    default:
+                }
+                listaPrincipal.add(lista);
+            }
+        }
+
+        return listaPrincipal.stream().flatMap(List::stream).toList();
+
     }
 
 }
