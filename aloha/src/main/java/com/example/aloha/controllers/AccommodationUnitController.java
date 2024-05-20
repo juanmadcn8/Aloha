@@ -38,14 +38,19 @@ public class AccommodationUnitController {
         return accommodationUnitService.getAccommodationUnitById(id);
     }
 
-    @GetMapping("/category/hotel")
+    @GetMapping("/category/hotels")
     public List<AccommodationUnit> getAccommodationUnitsByCategoryHotel() {
         return accommodationUnitService.getAccommodationUnitsByCategoryHotel();
     }
 
-    @GetMapping("/category/bungalow")
+    @GetMapping("/category/bungalows")
     public List<AccommodationUnit> getAccommodationUnitsByCategoryBungalow() {
         return accommodationUnitService.getAccommodationUnitsByCategoryBungalow();
+    }
+
+    @GetMapping("/category/hostels")
+    public List<AccommodationUnit> getAccommodationUnitsByCategoryHostel() {
+        return accommodationUnitService.getAccommodationUnitsByCategoryHostel();
     }
 
     @PostMapping("/create")
