@@ -23,4 +23,6 @@ public interface AccommodationUnitService {
     public List<AccommodationUnit> getAccommodationUnitsByCategoryBungalow();
 
     public List<AccommodationUnit> getAccommodationUnitsByCategoryHostel();
+
+    public List<AccommodationUnit> getAccommodationUnitsByCategoryHouse();
 }
