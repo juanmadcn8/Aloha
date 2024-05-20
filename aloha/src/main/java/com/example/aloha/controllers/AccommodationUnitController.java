@@ -43,6 +43,11 @@ public class AccommodationUnitController {
         return accommodationUnitService.getAccommodationUnitsByCategoryHotel();
     }
 
+    @GetMapping("/category/bungalow")
+    public List<AccommodationUnit> getAccommodationUnitsByCategoryBungalow() {
+        return accommodationUnitService.getAccommodationUnitsByCategoryBungalow();
+    }
+
     @PostMapping("/create")
     public void createAccommodationUnit(@RequestBody AccommodationUnit accommodationUnit) {
         accommodationUnitService.createAccommodationUnit(accommodationUnit);

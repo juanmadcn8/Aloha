@@ -19,4 +19,6 @@ public interface AccommodationUnitService {
     public void updateAccommodationUnit(AccommodationUnit accommodationUnit);
 
     public List<AccommodationUnit> getAccommodationUnitsByCategoryHotel();
+
+    public List<AccommodationUnit> getAccommodationUnitsByCategoryBungalow();
 }
