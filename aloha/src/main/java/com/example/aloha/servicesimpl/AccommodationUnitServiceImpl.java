@@ -48,4 +48,11 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
                 .toList();
     }
 
+    @Override
+    public List<AccommodationUnit> getAccommodationUnitsByCategoryHotel() {
+        return accommodationUnitRepository.findAll().stream()
+                .filter(accommodationUnit -> accommodationUnit.getCategory().getName().equals("hotel"))
+                .toList();
+    }
+
 }
