@@ -18,6 +18,7 @@ import com.example.aloha.auth.AuthResponse;
 import com.example.aloha.auth.LoginClientRequest;
 import com.example.aloha.dtos.ClientDTO;
 import com.example.aloha.models.Client;
+import com.example.aloha.services.BookingService;
 import com.example.aloha.services.ClientService;
 import com.example.aloha.servicesimpl.AuthService;
 
@@ -27,6 +28,9 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
+
+    @Autowired
+    private BookingService bookingService;
 
     @Autowired
     private AuthService authService;
@@ -68,9 +72,10 @@ public class ClientController {
         return ResponseEntity.ok(authService.loginClient(request));
     }
 
-    @DeleteMapping("/delete")
-    public void deleteClient(@RequestBody Client client) {
-        clientService.deleteClient(client.getId());
+    @DeleteMapping("/{id}/delete")
+    public void deleteClient(@PathVariable Long id) {
+        bookingService.deleteBookingByIdClient(id);
+        clientService.deleteClient(id);
     }
 
 }
