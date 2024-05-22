@@ -14996,3 +14996,9 @@ Caused by: java.lang.IllegalArgumentException: string
 	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:187)
 	at org.h2.value.ValueDate.parse(ValueDate.java:51)
 	... 164 more
+2024-05-22 13:42:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2024-05-22 15:33:12 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
