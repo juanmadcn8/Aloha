@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.aloha.models.ClientCard;
 import com.example.aloha.repositories.ClientCardRepository;
 import com.example.aloha.services.ClientCardService;
 
+@Service
 public class ClientCardServiceImpl implements ClientCardService {
 
     @Autowired
