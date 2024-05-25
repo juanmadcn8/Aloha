@@ -23,8 +23,8 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
     }
 
     @Override
-    public Optional<AccommodationUnit> getAccommodationUnitById(Long id) {
-        return accommodationUnitRepository.findById(id);
+    public AccommodationUnit getAccommodationUnitById(Long id) {
+        return accommodationUnitRepository.findById(id).orElse(null);
     }
 
     @Override

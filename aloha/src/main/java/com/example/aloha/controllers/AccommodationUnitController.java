@@ -34,7 +34,7 @@ public class AccommodationUnitController {
     }
 
     @GetMapping("/{id}")
-    public Optional<AccommodationUnit> getAccommodationUnitById(@PathVariable Long id) {
+    public AccommodationUnit getAccommodationUnitById(@PathVariable Long id) {
         return accommodationUnitService.getAccommodationUnitById(id);
     }
 

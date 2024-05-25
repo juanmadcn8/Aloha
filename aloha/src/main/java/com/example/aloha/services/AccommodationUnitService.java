@@ -8,7 +8,7 @@ import com.example.aloha.models.AccommodationUnit;
 public interface AccommodationUnitService {
     public List<AccommodationUnit> getAccommodationUnits();
 
-    public Optional<AccommodationUnit> getAccommodationUnitById(Long id);
+    public AccommodationUnit getAccommodationUnitById(Long id);
 
     public List<AccommodationUnit> getAccommodationUnitsByAccommodationLocation(String location);
 
