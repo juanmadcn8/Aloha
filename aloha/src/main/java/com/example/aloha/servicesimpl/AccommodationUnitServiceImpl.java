@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.aloha.models.AccommodationUnit;
 import com.example.aloha.repositories.AccommodationUnitRepository;
+import com.example.aloha.repositories.AccommodationUnitServiceRepository;
 import com.example.aloha.services.AccommodationUnitService;
 
 @Service
@@ -16,6 +17,9 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
 
     @Autowired
     private AccommodationUnitRepository accommodationUnitRepository;
+
+    @Autowired
+    private AccommodationUnitServiceRepository accommodationUnitServiceRepository;
 
     @Override
     public List<AccommodationUnit> getAccommodationUnits() {
@@ -118,6 +122,50 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
         }
 
         return listaPrincipal.stream().flatMap(List::stream).toList();
+
+    }
+
+    @Override
+    public List<AccommodationUnit> getAccommodationUnitsByService(Boolean[] service) {
+        List<List<com.example.aloha.models.AccommodationUnitService>> listaPrincipal = new ArrayList<>();
+        List<com.example.aloha.models.AccommodationUnitService> ac = accommodationUnitServiceRepository.findAll();
+
+        List<com.example.aloha.models.AccommodationUnitService> listAc = new ArrayList<>();
+        List<AccommodationUnit> accommodationUnits = new ArrayList<>();
+
+        for (int i = 0; i < service.length; i++) {
+            if (service[i]) {
+                switch (i) {
+                    case 0:
+                        listAc = ac.stream().filter(acc -> acc.getService().getName().equals("Piscina")).toList();
+                        break;
+
+                    case 1:
+                        listAc = ac.stream().filter(acc -> acc.getService().getName().equals("Admite mascotas"))
+                                .toList();
+                        break;
+
+                    case 2:
+                        listAc = ac.stream().filter(acc -> acc.getService().getName().equals("Wifi")).toList();
+                        break;
+
+                    case 3:
+                        listAc = ac.stream().filter(acc -> acc.getService().getName().equals("Parking")).toList();
+                        break;
+
+                    default:
+                }
+                listaPrincipal.add(listAc);
+            }
+        }
+
+        for (int i = 0; i < listaPrincipal.size(); i++) {
+            for (int j = 0; j < listaPrincipal.get(i).size(); j++) {
+                accommodationUnits.add(listaPrincipal.get(i).get(j).getAccommodationUnit());
+            }
+        }
+
+        return accommodationUnits;
 
     }
 

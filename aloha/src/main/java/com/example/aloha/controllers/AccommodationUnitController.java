@@ -33,6 +33,11 @@ public class AccommodationUnitController {
         return accommodationUnitService.getAccommodationUnitsByAccommodationLocation(location);
     }
 
+    @GetMapping("/service/{services}")
+    public List<AccommodationUnit> getAccommodationUnitsByService(@PathVariable Boolean[] services) {
+        return accommodationUnitService.getAccommodationUnitsByService(services);
+    }
+
     @GetMapping("/{id}")
     public AccommodationUnit getAccommodationUnitById(@PathVariable Long id) {
         return accommodationUnitService.getAccommodationUnitById(id);
