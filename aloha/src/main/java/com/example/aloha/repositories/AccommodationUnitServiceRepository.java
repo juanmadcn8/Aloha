@@ -12,4 +12,7 @@ import com.example.aloha.models.AccommodationUnitService;
 public interface AccommodationUnitServiceRepository extends JpaRepository<AccommodationUnitService, Long> {
     @Query(value = "SELECT * FROM accommodation_unit_service WHERE accommodation_unit_id = :id", nativeQuery = true)
     List<AccommodationUnitService> findByAccommodationUnitId(Long id);
+
+    @Query(value = "SELECT * FROM accommodation_unit_service", nativeQuery = true)
+    List<AccommodationUnitService> findByNameService(String nameService);
 }

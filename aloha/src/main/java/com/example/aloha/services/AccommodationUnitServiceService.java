@@ -18,4 +18,6 @@ public interface AccommodationUnitServiceService {
     public void updateAccommodationUnitService(AccommodationUnitService accommodationUnitService);
 
     public List<AccommodationUnitService> getAccommodationUnitServicesByAccommodationUnitId(Long id);
+
+    public List<AccommodationUnitService> getAccommodationUnitServicesByNameService(String nameService);
 }

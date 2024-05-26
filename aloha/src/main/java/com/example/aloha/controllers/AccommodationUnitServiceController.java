@@ -38,6 +38,11 @@ public class AccommodationUnitServiceController {
         return accommodationUnitServiceService.getAccommodationUnitServicesByAccommodationUnitId(id);
     }
 
+    @GetMapping("/nameService/{nameService}")
+    public List<AccommodationUnitService> getAccommodationUnitServicesByNameService(@PathVariable String nameService) {
+        return accommodationUnitServiceService.getAccommodationUnitServicesByNameService(nameService);
+    }
+
     @PostMapping("/create")
     public void createAccommodationUnitService(@RequestBody AccommodationUnitService accommodationUnitService) {
         accommodationUnitServiceService.createAccommodationUnitService(accommodationUnitService);

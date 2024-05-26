@@ -46,4 +46,10 @@ public class AccommodationUnitServiceServiceImpl implements AccommodationUnitSer
         return accommodationUnitServiceRepository.findByAccommodationUnitId(id);
     }
 
+    @Override
+    public List<AccommodationUnitService> getAccommodationUnitServicesByNameService(String nameService) {
+        return accommodationUnitServiceRepository.findAll().stream()
+                .filter(accommodationUnit -> accommodationUnit.getService().getName().equals(nameService)).toList();
+    }
+
 }
