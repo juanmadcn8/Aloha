@@ -54,7 +54,7 @@ public class AccommodationUnitServiceController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteAccommodationUnitServiceById(Long id) {
+    public void deleteAccommodationUnitServiceById(@PathVariable Long id) {
         accommodationUnitServiceService.deleteAccommodationUnitServiceById(id);
     }
 
