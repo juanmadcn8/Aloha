@@ -41,4 +41,27 @@ public class CardServiceImpl implements CardService {
         cardRepository.deleteById(id);
     }
 
+    @Override
+    public boolean existCard(Card card) {
+        Card catchCard = cardRepository.findByNumber(card.getNumber());
+
+        if (catchCard == null) {
+            return false;
+        } else {
+            if (catchCard.getExpirationDate() == card.getExpirationDate() && catchCard.getCvv() == card.getCvv()
+                    && catchCard.getOwner() == card.getOwner()) {
+                return true;
+            } else {
+                return false;
+
+            }
+
+        }
+    }
+
+    @Override
+    public Card getCardByNumber(String number) {
+        return cardRepository.findByNumber(number);
+    }
+
 }

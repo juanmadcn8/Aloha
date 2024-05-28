@@ -48,4 +48,9 @@ public class CardController {
         cardService.deleteCard(card.getId());
     }
 
+    @GetMapping("/exist")
+    public boolean existCard(@RequestBody Card card) {
+        return cardService.existCard(card);
+    }
+
 }

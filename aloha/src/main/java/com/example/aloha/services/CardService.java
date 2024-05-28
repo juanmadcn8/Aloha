@@ -10,9 +10,13 @@ public interface CardService {
 
     public Optional<Card> getCardById(Long id);
 
+    public Card getCardByNumber(String number);
+
     public void createCard(Card card);
 
     public void updateCard(Card card);
 
     public void deleteCard(Long id);
+
+    public boolean existCard(Card card);
 }
