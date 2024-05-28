@@ -68,6 +68,19 @@ public class AccommodationUnitController {
         return accommodationUnitService.getAccommodationUnitsByCategoryHouse();
     }
 
+    @GetMapping("/price/{price}")
+    public List<AccommodationUnit> getAccommodationUnitsByMaxPrice(@PathVariable Double price) {
+        return accommodationUnitService.getAccommodationUnitsByMaxPrice(price);
+    }
+
+    @GetMapping("/location/{location}/price/{price}/services/{services}/categories/{categories}")
+    public List<AccommodationUnit> getAccommodationUnitsByLocationMaxPriceServicesAndCategories(
+            @PathVariable String location,
+            @PathVariable Double price, @PathVariable Boolean[] services, @PathVariable Boolean[] categories) {
+        return accommodationUnitService.getAccommodationUnitsByLocationMaxPriceServicesAndCategories(location, price,
+                services, categories);
+    }
+
     @PostMapping("/create")
     public void createAccommodationUnit(@RequestBody AccommodationUnit accommodationUnit) {
         accommodationUnitService.createAccommodationUnit(accommodationUnit);
@@ -78,9 +91,9 @@ public class AccommodationUnitController {
         accommodationUnitService.updateAccommodationUnit(accommodationUnit);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteAccommodationUnitById(@RequestBody AccommodationUnit accommodationUnit) {
-        accommodationUnitService.deleteAccommodationUnitById(accommodationUnit.getId());
+    @DeleteMapping("/delete/{id}")
+    public void deleteAccommodationUnitById(@PathVariable Long id) {
+        accommodationUnitService.deleteAccommodationUnitById(id);
     }
 
 }

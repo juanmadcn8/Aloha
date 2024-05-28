@@ -18,5 +18,7 @@ public interface BookingService {
 
     public void deleteBookingByIdClient(Long id);
 
+    public void deleteBookingByIdAccommodationUnit(Long id);
+
     public List<Booking> getBookingsByClientId(Long id);
 }

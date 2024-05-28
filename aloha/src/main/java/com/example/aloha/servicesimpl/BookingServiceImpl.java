@@ -51,4 +51,9 @@ public class BookingServiceImpl implements BookingService {
         bookingRepository.deleteByClientId(id);
     }
 
+    @Override
+    public void deleteBookingByIdAccommodationUnit(Long id) {
+        bookingRepository.deleteByAccommodationUnitId(id);
+    }
+
 }

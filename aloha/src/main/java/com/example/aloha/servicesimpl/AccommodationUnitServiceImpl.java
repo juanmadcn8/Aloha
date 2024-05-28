@@ -1,6 +1,7 @@
 package com.example.aloha.servicesimpl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -167,6 +168,99 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
 
         return accommodationUnits;
 
+    }
+
+    @Override
+    public List<AccommodationUnit> getAccommodationUnitsByMaxPrice(Double maxPrice) {
+        return accommodationUnitRepository.getAccommodationUnitsByMaxPrice(maxPrice);
+    }
+
+    @Override
+    public List<AccommodationUnit> getAccommodationUnitsByLocationMaxPriceServicesAndCategories(String location,
+            Double maxPrice, Boolean[] services, Boolean[] categories) {
+        // List<AccommodationUnit> accommodationUnits =
+        // this.getAccommodationUnitsByAccommodationLocation(location);
+
+        // accommodationUnits = accommodationUnits.stream()
+        // .filter(accommodationUnit -> accommodationUnit.getPrice() <=
+        // maxPrice).toList();
+
+        // List<AccommodationUnit> accommodationUnitsByService =
+        // this.getAccommodationUnitsByService(services);
+        // List<AccommodationUnit> accommodationUnitsByCategories =
+        // this.getAccommodationUnitsByCategories(categories);
+
+        List<List<com.example.aloha.models.AccommodationUnitService>> listaPrincipal = new ArrayList<>();
+
+        List<AccommodationUnit> accommodationUnits = new ArrayList<>();
+
+        List<com.example.aloha.models.AccommodationUnitService> ac = accommodationUnitServiceRepository.findAll()
+                .stream().filter(acc -> acc.getAccommodationUnit().getAccommodation().getLocation().equals(location))
+                .toList();
+
+        List<Boolean> serviceList = new ArrayList<>();
+
+        serviceList = Arrays.asList(services);
+
+        ac = ac.stream().filter(acc -> acc.getAccommodationUnit().getPrice() <= maxPrice).toList();
+
+        List<com.example.aloha.models.AccommodationUnitService> acCopia = new ArrayList<>(ac);
+
+        if (serviceList.contains(true)) {
+            System.out.println("-------------ENTRA-------------");
+            for (int i = 0; i < services.length; i++) {
+                if (services[i]) {
+
+                    for (int j = 0; j < categories.length; j++) {
+                        if (categories[j]) {
+                            if (i == 0) {
+
+                            }
+                        }
+                    }
+
+                    switch (i) {
+                        case 0:
+                            acCopia = ac.stream().filter(acc -> acc.getService().getName().equals("Piscina"))
+                                    .filter(acc -> acc.getAccommodationUnit().getCategory().equals("ca")).toList();
+                            break;
+
+                        case 1:
+                            acCopia = ac.stream().filter(acc -> acc.getService().getName().equals("Admite mascotas"))
+                                    .toList();
+                            break;
+
+                        case 2:
+                            acCopia = ac.stream().filter(acc -> acc.getService().getName().equals("Wifi")).toList();
+                            break;
+
+                        case 3:
+                            acCopia = ac.stream().filter(acc -> acc.getService().getName().equals("Parking")).toList();
+                            break;
+
+                        default:
+                    }
+                    listaPrincipal.add(acCopia);
+                }
+            }
+
+        }
+
+        // for (int i = 0; i < listaPrincipal.size(); i++) {
+        // for (int j = 0; j < listaPrincipal.get(i).size(); j++) {
+        // accommodationUnits.add(listaPrincipal.get(i).get(j).getAccommodationUnit());
+        // }
+        // }
+
+        System.out.println(listaPrincipal);
+
+        return accommodationUnits;
+
+    }
+
+    @Override
+    public void deleteAccommodationUnitByIdAccommodation(Long id) {
+        accommodationUnitRepository.deleteAccommodationUnitByIdAccommodation(id);
     }
 
 }

@@ -53,9 +53,9 @@ public class AccommodationUnitServiceController {
         accommodationUnitServiceService.updateAccommodationUnitService(accommodationUnitService);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteAccommodationUnitServiceById(@RequestBody AccommodationUnitService accommodationUnitService) {
-        accommodationUnitServiceService.deleteAccommodationUnitServiceById(accommodationUnitService.getId());
+    @DeleteMapping("/delete/{id}")
+    public void deleteAccommodationUnitServiceById(Long id) {
+        accommodationUnitServiceService.deleteAccommodationUnitServiceById(id);
     }
 
 }

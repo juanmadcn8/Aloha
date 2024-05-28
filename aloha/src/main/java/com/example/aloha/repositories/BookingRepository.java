@@ -20,4 +20,9 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     @Modifying
     @Query(value = "DELETE FROM booking WHERE client_id = :id", nativeQuery = true)
     void deleteByClientId(Long id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM booking WHERE accommodation_unit_id = :id", nativeQuery = true)
+    void deleteByAccommodationUnitId(Long id);
 }

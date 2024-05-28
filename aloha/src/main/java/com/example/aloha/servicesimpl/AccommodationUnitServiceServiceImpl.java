@@ -52,4 +52,9 @@ public class AccommodationUnitServiceServiceImpl implements AccommodationUnitSer
                 .filter(accommodationUnit -> accommodationUnit.getService().getName().equals(nameService)).toList();
     }
 
+    @Override
+    public void deleteAccommodationUnitServiceByAccommodationUnitId(Long id) {
+        accommodationUnitServiceRepository.deleteByAccommodationUnitId(id);
+    }
+
 }
