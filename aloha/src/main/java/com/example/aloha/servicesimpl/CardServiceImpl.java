@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.aloha.dtos.BooleanResponse;
 import com.example.aloha.models.Card;
 import com.example.aloha.models.ClientCard;
 import com.example.aloha.repositories.CardRepository;
@@ -49,18 +50,18 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public Boolean existCard(Card card) {
+    public BooleanResponse existCard(Card card) {
         Card catchCard = cardRepository.findByNumber(card.getNumber());
 
         if (catchCard == null) {
-            return false;
+            return new BooleanResponse(false);
         } else {
             if (catchCard.getExpirationDate().equals(card.getExpirationDate())
                     && catchCard.getCvv().equals(card.getCvv())
                     && catchCard.getOwner().equals(card.getOwner())) {
-                return true;
+                return new BooleanResponse(true);
             } else {
-                return false;
+                return new BooleanResponse(false);
 
             }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.aloha.dtos.BooleanResponse;
 import com.example.aloha.models.Card;
 import com.example.aloha.services.CardService;
 
@@ -55,7 +56,7 @@ public class CardController {
     }
 
     @GetMapping("/exist")
-    public Boolean existCard(@RequestBody Card card) {
+    public BooleanResponse existCard(@RequestBody Card card) {
         return cardService.existCard(card);
     }
 

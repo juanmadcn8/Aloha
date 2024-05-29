@@ -3,6 +3,7 @@ package com.example.aloha.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.aloha.dtos.BooleanResponse;
 import com.example.aloha.models.Card;
 
 public interface CardService {
@@ -20,7 +21,7 @@ public interface CardService {
 
     public void deleteCard(Long id);
 
-    public Boolean existCard(Card card);
+    public BooleanResponse existCard(Card card);
 
     public List<Card> getCardByIdUsuario(Long id);
 }
