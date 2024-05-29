@@ -178,17 +178,6 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
     @Override
     public List<AccommodationUnit> getAccommodationUnitsByLocationMaxPriceServicesAndCategories(String location,
             Double maxPrice, Boolean[] services, Boolean[] categories) {
-        // List<AccommodationUnit> accommodationUnits =
-        // this.getAccommodationUnitsByAccommodationLocation(location);
-
-        // accommodationUnits = accommodationUnits.stream()
-        // .filter(accommodationUnit -> accommodationUnit.getPrice() <=
-        // maxPrice).toList();
-
-        // List<AccommodationUnit> accommodationUnitsByService =
-        // this.getAccommodationUnitsByService(services);
-        // List<AccommodationUnit> accommodationUnitsByCategories =
-        // this.getAccommodationUnitsByCategories(categories);
 
         List<List<com.example.aloha.models.AccommodationUnitService>> listaPrincipal = new ArrayList<>();
 
@@ -199,30 +188,22 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
                 .toList();
 
         List<Boolean> serviceList = new ArrayList<>();
-
         serviceList = Arrays.asList(services);
+
+        List<Boolean> categoryList = new ArrayList<>();
+        categoryList = Arrays.asList(categories);
 
         ac = ac.stream().filter(acc -> acc.getAccommodationUnit().getPrice() <= maxPrice).toList();
 
         List<com.example.aloha.models.AccommodationUnitService> acCopia = new ArrayList<>(ac);
 
         if (serviceList.contains(true)) {
-            System.out.println("-------------ENTRA-------------");
             for (int i = 0; i < services.length; i++) {
                 if (services[i]) {
-
-                    for (int j = 0; j < categories.length; j++) {
-                        if (categories[j]) {
-                            if (i == 0) {
-
-                            }
-                        }
-                    }
-
                     switch (i) {
                         case 0:
                             acCopia = ac.stream().filter(acc -> acc.getService().getName().equals("Piscina"))
-                                    .filter(acc -> acc.getAccommodationUnit().getCategory().equals("ca")).toList();
+                                    .toList();
                             break;
 
                         case 1:
@@ -240,19 +221,87 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
 
                         default:
                     }
+
+                    if (categoryList.contains(true)) {
+                        for (int j = 0; j < categories.length; j++) {
+                            if (categories[j]) {
+                                switch (j) {
+                                    case 0:
+                                        acCopia = acCopia.stream()
+                                                .filter(acc -> acc.getAccommodationUnit().getCategory()
+                                                        .getName().equals("house"))
+                                                .toList();
+                                        break;
+
+                                    case 1:
+                                        acCopia = acCopia.stream()
+                                                .filter(acc -> acc.getAccommodationUnit().getCategory()
+                                                        .getName().equals("hotel"))
+                                                .toList();
+                                        break;
+
+                                    case 2:
+                                        acCopia = acCopia.stream()
+                                                .filter(acc -> acc.getAccommodationUnit().getCategory()
+                                                        .getName().equals("hostel"))
+                                                .toList();
+                                        break;
+
+                                    case 3:
+                                        acCopia = acCopia.stream()
+                                                .filter(acc -> acc.getAccommodationUnit().getCategory()
+                                                        .getName().equals("bungalow"))
+                                                .toList();
+                                        break;
+
+                                    default:
+                                }
+                            }
+
+                        }
+                    }
                     listaPrincipal.add(acCopia);
                 }
             }
 
+        } else if (categoryList.contains(true)) {
+            for (int i = 0; i < categories.length; i++) {
+                if (categories[i]) {
+                    switch (i) {
+                        case 0:
+                            acCopia = ac.stream().filter(acc -> acc.getAccommodationUnit().getCategory().getName()
+                                    .equals("house")).toList();
+                            break;
+
+                        case 1:
+                            acCopia = ac.stream().filter(acc -> acc.getAccommodationUnit().getCategory().getName()
+                                    .equals("hotel")).toList();
+                            break;
+
+                        case 2:
+                            acCopia = ac.stream().filter(acc -> acc.getAccommodationUnit().getCategory().getName()
+                                    .equals("hostel")).toList();
+                            break;
+
+                        case 3:
+                            acCopia = ac.stream().filter(acc -> acc.getAccommodationUnit().getCategory().getName()
+                                    .equals("bungalow")).toList();
+                            break;
+
+                        default:
+                    }
+                    listaPrincipal.add(acCopia);
+                }
+            }
+        } else {
+            listaPrincipal.add(ac);
         }
 
-        // for (int i = 0; i < listaPrincipal.size(); i++) {
-        // for (int j = 0; j < listaPrincipal.get(i).size(); j++) {
-        // accommodationUnits.add(listaPrincipal.get(i).get(j).getAccommodationUnit());
-        // }
-        // }
-
-        System.out.println(listaPrincipal);
+        for (int i = 0; i < listaPrincipal.size(); i++) {
+            for (int j = 0; j < listaPrincipal.get(i).size(); j++) {
+                accommodationUnits.add(listaPrincipal.get(i).get(j).getAccommodationUnit());
+            }
+        }
 
         return accommodationUnits;
 
