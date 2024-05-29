@@ -1,5 +1,6 @@
 package com.example.aloha.servicesimpl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.aloha.models.Card;
+import com.example.aloha.models.ClientCard;
 import com.example.aloha.repositories.CardRepository;
+import com.example.aloha.repositories.ClientCardRepository;
 import com.example.aloha.services.CardService;
 
 @Service
@@ -15,6 +18,9 @@ public class CardServiceImpl implements CardService {
 
     @Autowired
     private CardRepository cardRepository;
+
+    @Autowired
+    private ClientCardRepository clientCardRepository;
 
     @Override
     public List<Card> getAllCards() {
@@ -83,6 +89,19 @@ public class CardServiceImpl implements CardService {
             }
 
         }
+    }
+
+    @Override
+    public List<Card> getCardByIdUsuario(Long id) {
+        List<ClientCard> clientCard = clientCardRepository.findByIdClient(id);
+        List<Card> cards = new ArrayList();
+
+        for (int i = 0; i < clientCard.size(); i++) {
+            cards.add(clientCard.get(i).getCard());
+
+        }
+
+        return cards;
     }
 
 }

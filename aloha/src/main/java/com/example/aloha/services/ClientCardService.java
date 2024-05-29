@@ -11,7 +11,7 @@ public interface ClientCardService {
 
     public Optional<ClientCard> getClientCardById(Long id);
 
-    public Optional<ClientCard> getClientCardByIdClient(Long idClient);
+    public List<ClientCard> getClientCardByIdClient(Long idClient);
 
     public void createClientCard(ClientCard clientCard);
 

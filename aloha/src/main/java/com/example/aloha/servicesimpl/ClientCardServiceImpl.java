@@ -28,8 +28,8 @@ public class ClientCardServiceImpl implements ClientCardService {
     }
 
     @Override
-    public Optional<ClientCard> getClientCardByIdClient(Long idClient) {
-        return null;
+    public List<ClientCard> getClientCardByIdClient(Long idClient) {
+        return clientCardRepository.findByIdClient(idClient);
     }
 
     @Override

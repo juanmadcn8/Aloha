@@ -33,6 +33,11 @@ public class CardController {
         return cardService.getCardById(id);
     }
 
+    @GetMapping("idUsuario/{id}")
+    public List<Card> getCardByIdUsuario(@PathVariable Long id) {
+        return cardService.getCardByIdUsuario(id);
+    }
+
     @PostMapping("/create")
     public Long createCard(@RequestBody Card card) {
         cardService.createCard(card);

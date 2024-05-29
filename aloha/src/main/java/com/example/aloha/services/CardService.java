@@ -21,4 +21,6 @@ public interface CardService {
     public void deleteCard(Long id);
 
     public Boolean existCard(Card card);
+
+    public List<Card> getCardByIdUsuario(Long id);
 }
