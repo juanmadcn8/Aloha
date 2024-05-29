@@ -183,9 +183,16 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
 
         List<AccommodationUnit> accommodationUnits = new ArrayList<>();
 
-        List<com.example.aloha.models.AccommodationUnitService> ac = accommodationUnitServiceRepository.findAll()
-                .stream().filter(acc -> acc.getAccommodationUnit().getAccommodation().getLocation().equals(location))
-                .toList();
+        List<com.example.aloha.models.AccommodationUnitService> ac = new ArrayList<>();
+
+        if (location != null && !location.equals("") && !location.equals("null")) {
+            ac = accommodationUnitServiceRepository.findAll()
+                    .stream()
+                    .filter(acc -> acc.getAccommodationUnit().getAccommodation().getLocation().equals(location))
+                    .toList();
+        } else {
+            ac = accommodationUnitServiceRepository.findAll();
+        }
 
         List<Boolean> serviceList = new ArrayList<>();
         serviceList = Arrays.asList(services);
