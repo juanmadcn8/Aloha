@@ -27,8 +27,9 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public void createCard(Card card) {
+    public Card createCard(Card card) {
         cardRepository.save(card);
+        return card;
     }
 
     @Override
@@ -44,8 +45,6 @@ public class CardServiceImpl implements CardService {
     @Override
     public Boolean existCard(Card card) {
         Card catchCard = cardRepository.findByNumber(card.getNumber());
-        System.out.println("Tarjeta recibida: " + card);
-        System.out.println("Tarjeta encontrada: " + catchCard);
 
         if (catchCard == null) {
             return false;
@@ -65,6 +64,25 @@ public class CardServiceImpl implements CardService {
     @Override
     public Card getCardByNumber(String number) {
         return cardRepository.findByNumber(number);
+    }
+
+    @Override
+    public Long getCardIdByNumberExpirationCvvAndOwner(Card card) {
+        Card catchCard = cardRepository.findByNumber(card.getNumber());
+
+        if (catchCard == null) {
+            return null;
+        } else {
+            if (catchCard.getExpirationDate().equals(card.getExpirationDate())
+                    && catchCard.getCvv().equals(card.getCvv())
+                    && catchCard.getOwner().equals(card.getOwner())) {
+                return catchCard.getId();
+            } else {
+                return null;
+
+            }
+
+        }
     }
 
 }

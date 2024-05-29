@@ -12,7 +12,9 @@ public interface CardService {
 
     public Card getCardByNumber(String number);
 
-    public void createCard(Card card);
+    public Long getCardIdByNumberExpirationCvvAndOwner(Card card);
+
+    public Card createCard(Card card);
 
     public void updateCard(Card card);
 

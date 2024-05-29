@@ -34,8 +34,9 @@ public class CardController {
     }
 
     @PostMapping("/create")
-    public void createCard(@RequestBody Card card) {
+    public Long createCard(@RequestBody Card card) {
         cardService.createCard(card);
+        return cardService.getCardIdByNumberExpirationCvvAndOwner(card);
     }
 
     @PutMapping("/update")
