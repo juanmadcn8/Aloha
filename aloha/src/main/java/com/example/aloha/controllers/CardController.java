@@ -55,7 +55,7 @@ public class CardController {
         cardService.deleteCard(card.getId());
     }
 
-    @GetMapping("/exist")
+    @PostMapping("/exist")
     public BooleanResponse existCard(@RequestBody Card card) {
         return cardService.existCard(card);
     }
