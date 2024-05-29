@@ -42,14 +42,17 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public boolean existCard(Card card) {
+    public Boolean existCard(Card card) {
         Card catchCard = cardRepository.findByNumber(card.getNumber());
+        System.out.println("Tarjeta recibida: " + card);
+        System.out.println("Tarjeta encontrada: " + catchCard);
 
         if (catchCard == null) {
             return false;
         } else {
-            if (catchCard.getExpirationDate() == card.getExpirationDate() && catchCard.getCvv() == card.getCvv()
-                    && catchCard.getOwner() == card.getOwner()) {
+            if (catchCard.getExpirationDate().equals(card.getExpirationDate())
+                    && catchCard.getCvv().equals(card.getCvv())
+                    && catchCard.getOwner().equals(card.getOwner())) {
                 return true;
             } else {
                 return false;

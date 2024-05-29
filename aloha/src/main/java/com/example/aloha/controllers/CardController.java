@@ -49,7 +49,7 @@ public class CardController {
     }
 
     @GetMapping("/exist")
-    public boolean existCard(@RequestBody Card card) {
+    public Boolean existCard(@RequestBody Card card) {
         return cardService.existCard(card);
     }
 

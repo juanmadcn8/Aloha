@@ -18,5 +18,5 @@ public interface CardService {
 
     public void deleteCard(Long id);
 
-    public boolean existCard(Card card);
+    public Boolean existCard(Card card);
 }
