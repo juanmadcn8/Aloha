@@ -1,5 +1,6 @@
 package com.example.aloha.controllers;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.aloha.models.AccommodationUnit;
 import com.example.aloha.services.AccommodationUnitService;
+import com.example.aloha.services.AccommodationUnitServiceService;
 
 @RestController
 @RequestMapping("/api/accommodation-unit")
@@ -22,6 +24,9 @@ public class AccommodationUnitController {
 
     @Autowired
     private AccommodationUnitService accommodationUnitService;
+
+    @Autowired
+    private AccommodationUnitServiceService accommodationUnitServiceService;
 
     @GetMapping()
     public List<AccommodationUnit> getAccommodationUnits() {
@@ -93,6 +98,7 @@ public class AccommodationUnitController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteAccommodationUnitById(@PathVariable Long id) {
+        accommodationUnitServiceService.deleteAccommodationUnitServiceByAccommodationUnitId(id);
         accommodationUnitService.deleteAccommodationUnitById(id);
     }
 
