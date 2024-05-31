@@ -30,11 +30,12 @@ public class AuthService {
         private final AuthenticationManager authenticationManager;
 
         public AuthResponse loginClient(LoginClientRequest request) {
+
+                System.out.println(request.getEmail() + " " + request.getPassword());
+
                 authenticationManager.authenticate(
                                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-
                 String token = null;
-
                 if (clientRepository.findByEmail(request.getEmail()).isPresent()) {
                         UserDetails client = clientRepository.findByEmail(request.getEmail()).orElseThrow();
                         token = jwtService.getToken(client);
@@ -83,7 +84,7 @@ public class AuthService {
                                 .surname(request.getSurname())
                                 .email(request.getEmail())
                                 .phone(request.getPhone())
-                                .role(Role.CLIENT)
+                                .role(request.getRole())
                                 .build();
 
                 clientRepository.save(client);
