@@ -28,7 +28,7 @@ public class Booking {
 
     private Date checkOut;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "accommodation_unit_id")
     private AccommodationUnit accommodationUnit;
 
