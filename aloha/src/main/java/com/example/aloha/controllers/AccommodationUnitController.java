@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.aloha.models.AccommodationUnit;
 import com.example.aloha.services.AccommodationUnitService;
 import com.example.aloha.services.AccommodationUnitServiceService;
+import com.example.aloha.services.BookingService;
 
 @RestController
 @RequestMapping("/api/accommodation-unit")
@@ -27,6 +28,9 @@ public class AccommodationUnitController {
 
     @Autowired
     private AccommodationUnitServiceService accommodationUnitServiceService;
+
+    @Autowired
+    private BookingService bookingService;
 
     @GetMapping()
     public List<AccommodationUnit> getAccommodationUnits() {
@@ -98,6 +102,7 @@ public class AccommodationUnitController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteAccommodationUnitById(@PathVariable Long id) {
+        bookingService.deleteBookingByIdAccommodationUnit(id);
         accommodationUnitServiceService.deleteAccommodationUnitServiceByAccommodationUnitId(id);
         accommodationUnitService.deleteAccommodationUnitById(id);
     }
