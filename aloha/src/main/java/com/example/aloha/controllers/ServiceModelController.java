@@ -33,6 +33,11 @@ public class ServiceModelController {
         return serviceModelService.getServiceById(id);
     }
 
+    @GetMapping("/accommodation-unit/{id}")
+    public List<ServiceModel> getServicesByAccommodationUnitId(@PathVariable Long id) {
+        return serviceModelService.getServicesByAccommodationUnitId(id);
+    }
+
     @PostMapping("/create")
     public void createService(@RequestBody ServiceModel service) {
         serviceModelService.createService(service);

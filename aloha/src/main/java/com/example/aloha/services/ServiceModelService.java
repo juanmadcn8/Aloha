@@ -11,6 +11,8 @@ public interface ServiceModelService {
 
     public Optional<ServiceModel> getServiceById(Long id);
 
+    public List<ServiceModel> getServicesByAccommodationUnitId(Long id);
+
     public void createService(ServiceModel service);
 
     public void deleteServiceById(Long id);
