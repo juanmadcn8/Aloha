@@ -1,5 +1,6 @@
 package com.example.aloha.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class Accommodation {
 
     private String name;
 
+    @Column(length = 1000)
     private String description;
 
     private String address;
