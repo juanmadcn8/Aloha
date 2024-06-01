@@ -1,5 +1,7 @@
 package com.example.aloha.services;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,5 +37,5 @@ public interface AccommodationUnitService {
     public List<AccommodationUnit> getAccommodationUnitsByMaxPrice(Double maxPrice);
 
     public List<AccommodationUnit> getAccommodationUnitsByLocationMaxPriceServicesAndCategories(String location,
-            Double maxPrice, Boolean[] services, Boolean[] categories);
+            Double maxPrice, Boolean[] services, Boolean[] categories, Date checkIn, Date checkOut);
 }

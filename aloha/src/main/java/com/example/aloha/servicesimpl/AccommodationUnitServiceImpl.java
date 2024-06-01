@@ -1,5 +1,7 @@
 package com.example.aloha.servicesimpl;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.aloha.models.AccommodationUnit;
+import com.example.aloha.models.Booking;
 import com.example.aloha.repositories.AccommodationUnitRepository;
 import com.example.aloha.repositories.AccommodationUnitServiceRepository;
+import com.example.aloha.repositories.BookingRepository;
 import com.example.aloha.services.AccommodationUnitService;
 
 @Service
@@ -21,6 +25,9 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
 
     @Autowired
     private AccommodationUnitServiceRepository accommodationUnitServiceRepository;
+
+    @Autowired
+    private BookingRepository bookingRepository;
 
     @Override
     public List<AccommodationUnit> getAccommodationUnits() {
@@ -177,7 +184,7 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
 
     @Override
     public List<AccommodationUnit> getAccommodationUnitsByLocationMaxPriceServicesAndCategories(String location,
-            Double maxPrice, Boolean[] services, Boolean[] categories) {
+            Double maxPrice, Boolean[] services, Boolean[] categories, Date checkIn, Date checkOut) {
 
         List<List<com.example.aloha.models.AccommodationUnitService>> listaPrincipal = new ArrayList<>();
 
@@ -310,6 +317,19 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
             }
         }
 
+        System.out.println(accommodationUnits);
+
+        List<Booking> bookings = new ArrayList<>();
+
+        for (int i = 0; i < accommodationUnits.size(); i++) {
+            bookings = bookingRepository.findByAccommodationUnitId(accommodationUnits.get(i).getId());
+            for (int j = 0; j < bookings.size(); j++) {
+                if (!isAvailable(checkIn, checkOut, bookings.get(j).getCheckIn(), bookings.get(j).getCheckOut())) {
+                    accommodationUnits.remove(accommodationUnits.get(i));
+                }
+            }
+        }
+
         return accommodationUnits;
 
     }
@@ -317,6 +337,12 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
     @Override
     public void deleteAccommodationUnitByIdAccommodation(Long id) {
         accommodationUnitRepository.deleteAccommodationUnitByIdAccommodation(id);
+    }
+
+    private boolean isAvailable(Date checkIn, Date checkOut, Date newCheckIn, Date newCheckOut) {
+        return (newCheckIn.before(checkIn) && newCheckOut.before(checkIn))
+                || (newCheckIn.after(checkOut) && newCheckOut.after(checkOut));
+
     }
 
 }

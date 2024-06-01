@@ -82,12 +82,13 @@ public class AccommodationUnitController {
         return accommodationUnitService.getAccommodationUnitsByMaxPrice(price);
     }
 
-    @GetMapping("/location/{location}/price/{price}/services/{services}/categories/{categories}")
+    @GetMapping("/location/{location}/price/{price}/services/{services}/categories/{categories}/check-in/{checkIn}/check-out/{checkOut}")
     public List<AccommodationUnit> getAccommodationUnitsByLocationMaxPriceServicesAndCategories(
             @PathVariable String location,
-            @PathVariable Double price, @PathVariable Boolean[] services, @PathVariable Boolean[] categories) {
+            @PathVariable Double price, @PathVariable Boolean[] services, @PathVariable Boolean[] categories,
+            @PathVariable Date checkIn, @PathVariable Date checkOut) {
         return accommodationUnitService.getAccommodationUnitsByLocationMaxPriceServicesAndCategories(location, price,
-                services, categories);
+                services, categories, checkIn, checkOut);
     }
 
     @PostMapping("/create")
