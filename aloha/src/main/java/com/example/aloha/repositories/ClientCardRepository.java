@@ -21,4 +21,9 @@ public interface ClientCardRepository extends JpaRepository<ClientCard, Long> {
     @Query(value = "DELETE FROM client_card WHERE card_id = :idCard", nativeQuery = true)
     public void deleteByIdCard(Long idCard);
 
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM client_card WHERE client_id = :idClient", nativeQuery = true)
+    public void deleteByIdClient(Long idClient);
+
 }
