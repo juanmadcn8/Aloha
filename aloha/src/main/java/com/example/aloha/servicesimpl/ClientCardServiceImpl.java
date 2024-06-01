@@ -47,4 +47,9 @@ public class ClientCardServiceImpl implements ClientCardService {
         clientCardRepository.deleteById(id);
     }
 
+    @Override
+    public void deleteClientCardByIdCard(Long idCard) {
+        clientCardRepository.deleteByIdCard(idCard);
+    }
+
 }

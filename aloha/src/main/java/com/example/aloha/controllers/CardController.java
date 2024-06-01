@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.aloha.dtos.BooleanResponse;
 import com.example.aloha.models.Card;
 import com.example.aloha.services.CardService;
+import com.example.aloha.services.ClientCardService;
 
 @RestController
 @RequestMapping("/api/card")
@@ -23,6 +24,9 @@ public class CardController {
 
     @Autowired
     private CardService cardService;
+
+    @Autowired
+    private ClientCardService clientCardService;
 
     @GetMapping()
     public List<Card> getAllCards() {
@@ -52,6 +56,7 @@ public class CardController {
 
     @DeleteMapping("/delete")
     public void deleteCard(@RequestBody Card card) {
+        clientCardService.deleteClientCardByIdCard(card.getId());
         cardService.deleteCard(card.getId());
     }
 

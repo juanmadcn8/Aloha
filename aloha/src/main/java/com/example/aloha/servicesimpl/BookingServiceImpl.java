@@ -56,4 +56,9 @@ public class BookingServiceImpl implements BookingService {
         bookingRepository.deleteByAccommodationUnitId(id);
     }
 
+    @Override
+    public List<Booking> getBookingsByAccommodationUnitId(Long id) {
+        return bookingRepository.findByAccommodationUnitId(id);
+    }
+
 }

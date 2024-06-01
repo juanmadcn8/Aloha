@@ -18,4 +18,6 @@ public interface ClientCardService {
     public void updateClientCard(ClientCard clientCard);
 
     public void deleteClientCard(Long id);
+
+    public void deleteClientCardByIdCard(Long idCard);
 }
