@@ -37,5 +37,5 @@ public interface AccommodationUnitService {
     public List<AccommodationUnit> getAccommodationUnitsByMaxPrice(Double maxPrice);
 
     public List<AccommodationUnit> getAccommodationUnitsByLocationMaxPriceServicesAndCategories(String location,
-            Double maxPrice, Boolean[] services, Boolean[] categories, Date checkIn, Date checkOut);
+            Double maxPrice, Boolean[] services, Boolean[] categories, Date checkIn, Date checkOut, Integer capacity);
 }

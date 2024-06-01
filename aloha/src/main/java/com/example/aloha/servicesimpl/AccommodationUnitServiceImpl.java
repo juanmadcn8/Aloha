@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import com.example.aloha.models.AccommodationUnit;
@@ -184,7 +185,7 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
 
     @Override
     public List<AccommodationUnit> getAccommodationUnitsByLocationMaxPriceServicesAndCategories(String location,
-            Double maxPrice, Boolean[] services, Boolean[] categories, Date checkIn, Date checkOut) {
+            Double maxPrice, Boolean[] services, Boolean[] categories, Date checkIn, Date checkOut, Integer capacity) {
 
         List<List<com.example.aloha.models.AccommodationUnitService>> listaPrincipal = new ArrayList<>();
 
@@ -329,6 +330,9 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
                 }
             }
         }
+
+        accommodationUnits = accommodationUnits.stream()
+                .filter(accommodationUnit -> accommodationUnit.getCapacity() >= capacity).toList();
 
         return accommodationUnits;
 
