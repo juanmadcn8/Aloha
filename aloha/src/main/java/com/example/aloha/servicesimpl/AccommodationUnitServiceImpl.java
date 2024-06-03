@@ -318,8 +318,7 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
             }
         }
 
-        // Eliminar los alojamientos repetidos
-        accommodationUnits = accommodationUnits.stream().distinct().toList();
+        System.out.println(accommodationUnits);
 
         List<Booking> bookings = new ArrayList<>();
 
@@ -335,8 +334,9 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
         accommodationUnits = accommodationUnits.stream()
                 .filter(accommodationUnit -> accommodationUnit.getCapacity() >= capacity).toList();
 
-        return accommodationUnits;
+        accommodationUnits = accommodationUnits.stream().distinct().toList();
 
+        return accommodationUnits;
     }
 
     @Override

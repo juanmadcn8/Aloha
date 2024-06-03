@@ -1,5 +1,6 @@
 package com.example.aloha.servicesimpl;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +29,12 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public void createBooking(Booking booking) {
+        List<Booking> bookings = bookingRepository.findByAccommodationUnitId(booking.getAccommodationUnit().getId());
+        for (Booking b : bookings) {
+            if (!isAvailable(b.getCheckIn(), b.getCheckOut(), booking.getCheckIn(), booking.getCheckOut())) {
+                throw new IllegalArgumentException("Accommodation unit is not available for the selected period.");
+            }
+        }
         bookingRepository.save(booking);
     }
 
@@ -59,6 +66,11 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public List<Booking> getBookingsByAccommodationUnitId(Long id) {
         return bookingRepository.findByAccommodationUnitId(id);
+    }
+
+    private boolean isAvailable(Date checkIn, Date checkOut, Date newCheckIn, Date newCheckOut) {
+        return (newCheckIn.before(checkIn) && newCheckOut.before(checkIn))
+                || (newCheckIn.after(checkOut) && newCheckOut.after(checkOut));
     }
 
 }
