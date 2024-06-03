@@ -42,4 +42,13 @@ public class ImageServiceImpl implements ImageService {
         imageRepository.deleteById(id);
     }
 
+    @Override
+    public void deleteImagesByAccommodation(Long idAccommodation) {
+        List<Image> images = imageRepository.findAll();
+        images.removeIf(image -> !image.getAccommodation().getId().equals(idAccommodation));
+        for (Image image : images) {
+            imageRepository.deleteById(image.getId());
+        }
+    }
+
 }

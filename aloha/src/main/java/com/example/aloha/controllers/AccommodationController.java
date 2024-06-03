@@ -18,6 +18,7 @@ import com.example.aloha.services.AccommodationService;
 import com.example.aloha.services.AccommodationUnitService;
 import com.example.aloha.services.AccommodationUnitServiceService;
 import com.example.aloha.services.BookingService;
+import com.example.aloha.services.ImageService;
 
 @RestController
 @RequestMapping("/api/accommodation")
@@ -34,6 +35,9 @@ public class AccommodationController {
 
     @Autowired
     private BookingService bookingService;
+
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping()
     public List<Accommodation> getAllAccommodations() {
@@ -62,6 +66,7 @@ public class AccommodationController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteAccommodation(@PathVariable Long id) {
+        imageService.deleteImagesByAccommodation(id);
         bookingService.deleteBookingByIdAccommodationUnit(id);
         accommodationUnitServiceService.deleteAccommodationUnitServiceByAccommodationUnitId(id);
         accommodationUnitService.deleteAccommodationUnitByIdAccommodation(id);

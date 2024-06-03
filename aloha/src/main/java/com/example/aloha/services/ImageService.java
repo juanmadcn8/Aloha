@@ -15,4 +15,6 @@ public interface ImageService {
     public void updateImage(Image image);
 
     public void deleteImage(Long id);
+
+    public void deleteImagesByAccommodation(Long idAccommodation);
 }
