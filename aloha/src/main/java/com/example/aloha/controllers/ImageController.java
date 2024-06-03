@@ -46,4 +46,9 @@ public class ImageController {
         imageService.deleteImage(id);
     }
 
+    @DeleteMapping("/delete/accommodation/{idAccommodation}")
+    public void deleteImageByIdAccommodation(@PathVariable Long idAccommodation) {
+        imageService.deleteImagesByAccommodation(idAccommodation);
+    }
+
 }
