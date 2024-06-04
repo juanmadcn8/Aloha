@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.method.P;
@@ -187,13 +188,10 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
     public List<AccommodationUnit> getAccommodationUnitsByLocationMaxPriceServicesAndCategories(String location,
             Double maxPrice, Boolean[] services, Boolean[] categories, Date checkIn, Date checkOut, Integer capacity) {
 
-        List<List<com.example.aloha.models.AccommodationUnitService>> listaPrincipal = new ArrayList<>();
-
         List<AccommodationUnit> accommodationUnits = new ArrayList<>();
-
         List<com.example.aloha.models.AccommodationUnitService> ac = new ArrayList<>();
 
-        if (location != null && !location.equals("") && !location.equals("null")) {
+        if (location != null && !location.isEmpty() && !location.equals("null")) {
             ac = accommodationUnitServiceRepository.findAll()
                     .stream()
                     .filter(acc -> acc.getAccommodationUnit().getAccommodation().getLocation().equals(location))
@@ -202,129 +200,61 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
             ac = accommodationUnitServiceRepository.findAll();
         }
 
-        List<Boolean> serviceList = new ArrayList<>();
-        serviceList = Arrays.asList(services);
-
-        List<Boolean> categoryList = new ArrayList<>();
-        categoryList = Arrays.asList(categories);
-
         ac = ac.stream().filter(acc -> acc.getAccommodationUnit().getPrice() <= maxPrice).toList();
 
-        List<com.example.aloha.models.AccommodationUnitService> acCopia = new ArrayList<>(ac);
+        List<String> requiredServices = new ArrayList<>();
+        if (services[0])
+            requiredServices.add("Piscina");
+        if (services[1])
+            requiredServices.add("Admite mascotas");
+        if (services[2])
+            requiredServices.add("Wifi");
+        if (services[3])
+            requiredServices.add("Parking");
 
-        if (serviceList.contains(true)) {
-            for (int i = 0; i < services.length; i++) {
-                if (services[i]) {
-                    switch (i) {
-                        case 0:
-                            acCopia = ac.stream().filter(acc -> acc.getService().getName().equals("Piscina"))
-                                    .toList();
-                            break;
-
-                        case 1:
-                            acCopia = ac.stream().filter(acc -> acc.getService().getName().equals("Admite mascotas"))
-                                    .toList();
-                            break;
-
-                        case 2:
-                            acCopia = ac.stream().filter(acc -> acc.getService().getName().equals("Wifi")).toList();
-                            break;
-
-                        case 3:
-                            acCopia = ac.stream().filter(acc -> acc.getService().getName().equals("Parking")).toList();
-                            break;
-
-                        default:
-                    }
-
-                    if (categoryList.contains(true)) {
-                        for (int j = 0; j < categories.length; j++) {
-                            if (categories[j]) {
-                                switch (j) {
-                                    case 0:
-                                        acCopia = acCopia.stream()
-                                                .filter(acc -> acc.getAccommodationUnit().getCategory()
-                                                        .getName().equals("house"))
-                                                .toList();
-                                        break;
-
-                                    case 1:
-                                        acCopia = acCopia.stream()
-                                                .filter(acc -> acc.getAccommodationUnit().getCategory()
-                                                        .getName().equals("hotel"))
-                                                .toList();
-                                        break;
-
-                                    case 2:
-                                        acCopia = acCopia.stream()
-                                                .filter(acc -> acc.getAccommodationUnit().getCategory()
-                                                        .getName().equals("hostel"))
-                                                .toList();
-                                        break;
-
-                                    case 3:
-                                        acCopia = acCopia.stream()
-                                                .filter(acc -> acc.getAccommodationUnit().getCategory()
-                                                        .getName().equals("bungalow"))
-                                                .toList();
-                                        break;
-
-                                    default:
-                                }
-                            }
-
-                        }
-                    }
-                    listaPrincipal.add(acCopia);
-                }
-            }
-
-        } else if (categoryList.contains(true)) {
-            for (int i = 0; i < categories.length; i++) {
-                if (categories[i]) {
-                    switch (i) {
-                        case 0:
-                            acCopia = ac.stream().filter(acc -> acc.getAccommodationUnit().getCategory().getName()
-                                    .equals("house")).toList();
-                            break;
-
-                        case 1:
-                            acCopia = ac.stream().filter(acc -> acc.getAccommodationUnit().getCategory().getName()
-                                    .equals("hotel")).toList();
-                            break;
-
-                        case 2:
-                            acCopia = ac.stream().filter(acc -> acc.getAccommodationUnit().getCategory().getName()
-                                    .equals("hostel")).toList();
-                            break;
-
-                        case 3:
-                            acCopia = ac.stream().filter(acc -> acc.getAccommodationUnit().getCategory().getName()
-                                    .equals("bungalow")).toList();
-                            break;
-
-                        default:
-                    }
-                    listaPrincipal.add(acCopia);
-                }
-            }
-        } else {
-            listaPrincipal.add(ac);
+        if (!requiredServices.isEmpty()) {
+            ac = ac.stream()
+                    .collect(Collectors.groupingBy(acc -> acc.getAccommodationUnit()))
+                    .entrySet()
+                    .stream()
+                    .filter(entry -> {
+                        List<String> unitServices = entry.getValue()
+                                .stream()
+                                .map(acc -> acc.getService().getName())
+                                .distinct()
+                                .toList();
+                        return unitServices.containsAll(requiredServices);
+                    })
+                    .flatMap(entry -> entry.getValue().stream())
+                    .toList();
         }
 
-        for (int i = 0; i < listaPrincipal.size(); i++) {
-            for (int j = 0; j < listaPrincipal.get(i).size(); j++) {
-                accommodationUnits.add(listaPrincipal.get(i).get(j).getAccommodationUnit());
-            }
+        List<String> requiredCategories = new ArrayList<>();
+        if (categories[0])
+            requiredCategories.add("house");
+        if (categories[1])
+            requiredCategories.add("hotel");
+        if (categories[2])
+            requiredCategories.add("hostel");
+        if (categories[3])
+            requiredCategories.add("bungalow");
+
+        if (!requiredCategories.isEmpty()) {
+            ac = ac.stream()
+                    .filter(acc -> requiredCategories.contains(acc.getAccommodationUnit().getCategory().getName()))
+                    .toList();
         }
 
-        // Comprobar si la unidad de alojamiento está disponible
+        accommodationUnits = ac.stream()
+                .map(com.example.aloha.models.AccommodationUnitService::getAccommodationUnit)
+                .distinct()
+                .toList();
+
         accommodationUnits = accommodationUnits.stream()
                 .filter(accommodationUnit -> {
                     List<Booking> bookings1 = bookingRepository.findByAccommodationUnitId(accommodationUnit.getId());
-                    for (int j = 0; j < bookings1.size(); j++) {
-                        if (!isAvailable(checkIn, checkOut, bookings1.get(j).getCheckIn(),
-                                bookings1.get(j).getCheckOut())) {
+                    for (Booking booking : bookings1) {
+                        if (!isAvailable(checkIn, checkOut, booking.getCheckIn(), booking.getCheckOut())) {
                             return false;
                         }
                     }
@@ -332,9 +262,8 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
                 }).toList();
 
         accommodationUnits = accommodationUnits.stream()
-                .filter(accommodationUnit -> accommodationUnit.getCapacity() >= capacity).toList();
-
-        accommodationUnits = accommodationUnits.stream().distinct().toList();
+                .filter(accommodationUnit -> accommodationUnit.getCapacity() >= capacity)
+                .toList();
 
         return accommodationUnits;
     }
