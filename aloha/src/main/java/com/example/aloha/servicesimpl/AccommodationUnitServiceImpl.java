@@ -318,18 +318,18 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
             }
         }
 
-        System.out.println(accommodationUnits);
-
-        List<Booking> bookings = new ArrayList<>();
-
-        for (int i = 0; i < accommodationUnits.size(); i++) {
-            bookings = bookingRepository.findByAccommodationUnitId(accommodationUnits.get(i).getId());
-            for (int j = 0; j < bookings.size(); j++) {
-                if (!isAvailable(checkIn, checkOut, bookings.get(j).getCheckIn(), bookings.get(j).getCheckOut())) {
-                    accommodationUnits.remove(accommodationUnits.get(i));
-                }
-            }
-        }
+        // Comprobar si la unidad de alojamiento está disponible
+        accommodationUnits = accommodationUnits.stream()
+                .filter(accommodationUnit -> {
+                    List<Booking> bookings1 = bookingRepository.findByAccommodationUnitId(accommodationUnit.getId());
+                    for (int j = 0; j < bookings1.size(); j++) {
+                        if (!isAvailable(checkIn, checkOut, bookings1.get(j).getCheckIn(),
+                                bookings1.get(j).getCheckOut())) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }).toList();
 
         accommodationUnits = accommodationUnits.stream()
                 .filter(accommodationUnit -> accommodationUnit.getCapacity() >= capacity).toList();
