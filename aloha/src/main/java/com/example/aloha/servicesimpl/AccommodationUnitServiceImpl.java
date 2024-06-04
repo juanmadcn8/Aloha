@@ -344,9 +344,10 @@ public class AccommodationUnitServiceImpl implements AccommodationUnitService {
         accommodationUnitRepository.deleteAccommodationUnitByIdAccommodation(id);
     }
 
-    private boolean isAvailable(Date checkIn, Date checkOut, Date newCheckIn, Date newCheckOut) {
+    private boolean isAvailable(Date newCheckIn, Date newCheckOut, Date checkIn, Date checkOut) {
         return (newCheckIn.before(checkIn) && newCheckOut.before(checkIn))
-                || (newCheckIn.after(checkOut) && newCheckOut.after(checkOut));
+                || (newCheckIn.after(checkOut) && newCheckOut.after(checkOut))
+                || (newCheckIn.equals(checkOut) && newCheckOut.after(checkOut));
 
     }
 
