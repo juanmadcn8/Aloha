@@ -34,7 +34,16 @@ public class SecurityConfig {
                                                                 new AntPathRequestMatcher("/auth/**"),
                                                                 new AntPathRequestMatcher("/swagger-ui/**"),
                                                                 new AntPathRequestMatcher("/api-docs/**"),
-                                                                new AntPathRequestMatcher("/**"))
+                                                                // new AntPathRequestMatcher("/**"),
+                                                                new AntPathRequestMatcher("/api/accommodation/**"),
+                                                                new AntPathRequestMatcher("/api/accommodation-unit/**"),
+                                                                new AntPathRequestMatcher(
+                                                                                "/api/accommodation-unit-service/**"),
+                                                                new AntPathRequestMatcher("/api/category/**"),
+                                                                new AntPathRequestMatcher("/api/image/**"),
+                                                                new AntPathRequestMatcher("/api/service/**")
+                                                // new AntPathRequestMatcher("/api/booking/**")
+                                                )
                                                 .permitAll()
                                                 .anyRequest().authenticated())
                                 .sessionManagement(sessionManager -> sessionManager
